@@ -17,7 +17,7 @@ fileRequested = function(req, res) {
         fileName = fileName.substr(1);
     }
     if (!fs.existsSync(fileName)) {
-        console.log("### not exists");
+        console.error(`File ${fileName} not exists.`);
         res.writeHead(404);
         res.end();
         return true;
@@ -41,7 +41,7 @@ fileRequested = function(req, res) {
         res.end();
     });
     file.on('error', function () {
-        console.log("### error");
+        console.error(`Error reading file ${fileName}.`);
         res.writeHead(500);
         res.end();
     });
