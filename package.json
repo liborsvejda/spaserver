@@ -1,0 +1,12 @@
+{
+  "name": "spaserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "spaserver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Libor Švejda",
+  "license": "ISC"
+}
