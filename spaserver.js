@@ -1,10 +1,23 @@
 const http = require("http");
 const url = require("url");
 const fs = require("fs");
+const Entities = require('html-entities').AllHtmlEntities;
+const entities = new Entities();
 
 let srv;
 
-fileRequested = function(req, res) {
+const encodeStrings = function(o) {
+    for (let a in o) {
+        let v = o[a];
+        if (typeof v === "object") {
+            encodeStrings(o[a]);
+        } else if (typeof v === "string") {
+            o[a] = entities.encode(v);
+        }
+    }
+}
+
+const fileRequested = function(req, res) {
     let q = url.parse(req.url, false);
     let fileName = q.pathname;
     if (fileName == "/") {
@@ -83,6 +96,7 @@ exports.createSpaServer = function(port, processApi) {
                 if (data) {
                     try {
                         req.parameters = JSON.parse(data);
+                        encodeStrings(req.parameters);
                         processApi(req, res);
                     } catch (e) {
                         console.error(e);
@@ -91,6 +105,7 @@ exports.createSpaServer = function(port, processApi) {
             })
         } else {
             req.parameters = q.query;
+            encodeStrings(req.parameters);
             processApi(req, res);
         }
     }).listen(port);
