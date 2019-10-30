@@ -38,6 +38,10 @@ const fileRequested = function(req, res) {
     let contentType = "application/octet-stream";
     if (fileName.toLowerCase().endsWith(".html")) {
         contentType = "text/html";
+    } else if (fileName.toLowerCase().endsWith(".css")) {
+        contentType = "text/css";
+    } else if (fileName.toLowerCase().endsWith(".js")) {
+        contentType = "text/javascript";
     } else if (fileName.toLowerCase().endsWith(".jpg") || fileName.endsWith(".jpeg")) {
         contentType = "image/jpeg";
     } else if (fileName.toLowerCase().endsWith(".png")) {
