@@ -6,13 +6,20 @@ const entities = new Entities();
 
 let srv;
 
+exports.encodeString = function (s) {
+    return entities.encode(s);
+}
+exports.decodeString = function (s) {
+    return entities.decode(s);
+}
+
 const encodeStrings = function(o) {
     for (let a in o) {
         let v = o[a];
         if (typeof v === "object") {
             encodeStrings(o[a]);
         } else if (typeof v === "string") {
-            o[a] = entities.encode(v);
+            o[a] = encodeString(v);
         }
     }
 }
