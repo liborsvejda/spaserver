@@ -19,7 +19,7 @@ const encodeStrings = function(o) {
         if (typeof v === "object") {
             encodeStrings(o[a]);
         } else if (typeof v === "string") {
-            o[a] = encodeString(v);
+            o[a] = entities.encode(v);
         }
     }
 }
