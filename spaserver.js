@@ -78,8 +78,8 @@ const fileRequested = function(req, res) {
 exports.createSpaServer = function(port, processApi) {
     srv = http.createServer((req, res) => {
         //pozadavek na home page
-        if (req.url === "/") {
-            fs.readFile('index.html', function (err, data) {
+        if (req.url.endsWith("/") && fs.existsSync(req.url.substr(1)+"index.html")) {
+            fs.readFile(req.url.substr(1)+"index.html", function (err, data) {
                 res.writeHead(200, {'Content-Type': 'text/html'});
                 res.write(data);
                 res.end();
